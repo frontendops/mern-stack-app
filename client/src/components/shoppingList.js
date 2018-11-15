@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 
+import { connect } from 'react-redux';
+import { getItems } from '../actions/itemActions';
+
 
 class ShoppingList extends Component {
-    state = {
-        items: [
-            { id: "507f1f77bcf86cd799439011", name: 'rice' },
-            { id: "507f1f77bcf86cd799439012", name: 'chips' },
-            { id: "507f1f77bcf86cd799439013", name: 'ham' },
-            { id: "507f1f77bcf86cd799439014", name: 'water' }
-        ]
-    }
 
+    componentDidMount() {
+        this.props.getItems();
+    }
     render() {
-        const { items } = this.state;
+        const { items } = this.props.item;
 
         return(
             <div>
@@ -51,4 +49,8 @@ class ShoppingList extends Component {
     }
 }
 
-export default ShoppingList;
+const mapStateToProps = (state) => ({
+    item: state.item
+})
+
+export default connect(mapStateToProps, { getItems })(ShoppingList);
