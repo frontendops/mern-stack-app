@@ -20,7 +20,7 @@ mongoose.connect(db)
 app.use('/routes/api', items);
 
 //use port 3000 if not there use the available port
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
     console.log(`server started on ${port}`);
