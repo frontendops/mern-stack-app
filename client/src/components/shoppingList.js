@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
-import { getItems } from '../actions/itemActions';
+import { getItems, deleteItem } from '../actions/itemActions';
 
 
 class ShoppingList extends Component {
 
+
     componentDidMount() {
         this.props.getItems();
+    }
+
+    onDeleteClick = id => {
+        this.props.deleteItem(id);
     }
     render() {
         const { items } = this.props.item;
@@ -30,12 +35,7 @@ class ShoppingList extends Component {
                             return(
                                 <ul className="list-group-item" key={item.id}>
                                     <button className="btn btn-danger btn-sm"
-                                            onClick={() => {
-                                                //deletes item clicked on if its id does not match it is filtered out
-                                                this.setState(state => ({
-                                                    items: state.items.filter(chosen => chosen.id !== item.id)
-                                                }));
-                                            }}>&times;</button>
+                                            onClick={ this.onDeleteClick.bind(this, item.id) }>&times;</button>
                                     {item.name}
                                 </ul>
                             )
@@ -53,4 +53,4 @@ const mapStateToProps = (state) => ({
     item: state.item
 })
 
-export default connect(mapStateToProps, { getItems })(ShoppingList);
+export default connect(mapStateToProps, { getItems, deleteItem })(ShoppingList);
