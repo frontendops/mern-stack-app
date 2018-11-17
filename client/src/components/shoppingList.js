@@ -19,16 +19,7 @@ class ShoppingList extends Component {
 
         return(
             <div>
-                <button className="btn btn-primary"
-                    onClick={() => {
-                        const name = prompt('Enter Item');
-                        if (name) {
-                            this.setState(state => ({items: [...state.items, { id: "507f1f77bcf86cd799439017", name: name}]
-                        }));
-                        }
-
-                    }}
-                    >Add Item</button>
+                
                 <ul className="list-group">
                     {
                         items.map(item => {
