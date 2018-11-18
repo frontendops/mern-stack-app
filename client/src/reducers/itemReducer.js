@@ -1,19 +1,17 @@
-import { GET_ITEMS, ADD_ITEMS, DELETE_ITEM } from '../actions/types';
+import { GET_ITEMS, ADD_ITEMS, DELETE_ITEM, ITEMS_LOADING } from '../actions/types';
 
 const initialState = {
-    items: [
-        { id: "507f1f77bcf86cd799439011", name: 'rice' },
-        { id: "507f1f77bcf86cd799439012", name: 'chips' },
-        { id: "507f1f77bcf86cd799439013", name: 'ham' },
-        { id: "507f1f77bcf86cd799439014", name: 'turkey' }
-    ]
+    items: [],
+    loading: false
 };
 
 export default function(state = initialState, action) {
     switch(action.type) {
         case GET_ITEMS:
         return {
-            ...state
+            ...state,
+            items: action.payload,
+            loading: false
         };
 
         case DELETE_ITEM:
@@ -26,6 +24,12 @@ export default function(state = initialState, action) {
         return {
             ...state,
             items: [action.payload, ...state.items]
+        };
+
+        case ITEMS_LOADING:
+        return {
+            ...state,
+            loading: true
         };
     default:
         return state;
